@@ -15,8 +15,7 @@ def testWorking():
 @app.route('/dronePositions', methods = ['POST'])
 def savePositions():
     data = request.get_json()
-    for i in range(int(data['size'])):
-        col.insert_one(data['drones'][str(i)])
+    col.insert_one(data)
     return json.dumps({
         'status' : 'finished',
         'Added' : col.count()
