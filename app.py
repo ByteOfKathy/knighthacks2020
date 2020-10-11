@@ -25,10 +25,10 @@ def savePositions():
 def updatePos():
     data = request.get_json()
     col.update_one({'id': data['id']}, 
-    {'$set' : 
+    {'$set' : {
         'x' : data['x'],
         'y' : data['y'],
-        'z' : data['z']
+        'z' : data['z']}
     })
     return json.dumps({'status' : 'finished'})
 
