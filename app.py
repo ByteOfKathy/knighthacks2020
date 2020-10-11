@@ -15,12 +15,17 @@ def testWorking():
 @app.route('/dronePositions', methods = ['POST'])
 def savePositions():
     data = request.get_json()
-    if int(col.count()) is 0:
-        for i in range(int(data['size'])):
-            col.insert_one(data['drones'][str(i)], data['drones'][str(i)])
-    else:
-        for i in range(int(data['size'])):
-            col.update_one(data['drones'][str(i)], {'$set' : data['drones']})
+    for i in range(int(data['size'])):
+        col.insert_one(data['drones'][str(i)])
+    return json.dumps({
+        'status' : 'finished',
+        'Added' : col.count()
+    })
+
+@app.route('/updateDronePositions', methods = ['POST'])
+def updatePos():
+    data = request.get_json()
+    col.update_one(data['query'], data['updateData'])
     return json.dumps({'status' : 'finished'})
 
 @app.route('/test/getDronePositions', methods =  ['GET'])
