@@ -3,7 +3,6 @@ from pymongo import MongoClient
 import json
 
 app = Flask(__name__)
-app.debug = True
 client = MongoClient()
 
 db = client['knighthacks']
@@ -30,4 +29,4 @@ def getPositions():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug = True)
