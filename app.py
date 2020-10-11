@@ -24,7 +24,12 @@ def savePositions():
 @app.route('/updateDronePositions', methods = ['POST'])
 def updatePos():
     data = request.get_json()
-    col.update_one(data['query'], {'$set' : data['updateData']})
+    col.update_one({'id': data[id]}, 
+    {'$set' : 
+        'x' : data['x'],
+        'y' : data['y'],
+        'z' : data['z']
+    })
     return json.dumps({'status' : 'finished'})
 
 @app.route('/test/getDronePositions', methods =  ['GET'])
