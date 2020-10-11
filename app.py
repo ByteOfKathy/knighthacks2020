@@ -17,7 +17,7 @@ def savePositions():
     data = request.get_json()
     if int(col.count()) is 0:
         for i in range(int(data['size'])):
-            col.insert_one(data['drones'][str(i)], data['drones'])
+            col.insert_one(data['drones'][str(i)], data['drones'][str(i)])
     else:
         for i in range(int(data['size'])):
             col.update_one(data['drones'][str(i)], {'$set' : data['drones']})
@@ -29,4 +29,4 @@ def getPositions():
 
 
 if __name__ == "__main__":
-    app.run(debug = True)
+    app.run()
