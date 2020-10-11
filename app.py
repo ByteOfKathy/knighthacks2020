@@ -37,8 +37,9 @@ def getPositions():
     ret = {}
     cnt = 0
     for i in col.find():
-        ret[str(cnt)] = jsonify(str(i))
-        cnt += 1
+        for key in i:
+            ret[str(cnt)] = str(i[key])
+            cnt += 1
     return ret
 
 
