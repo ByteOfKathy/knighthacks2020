@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from pymongo import MongoClient
 import json
 
@@ -24,7 +24,7 @@ def savePositions():
 @app.route('/updateDronePositions', methods = ['POST'])
 def updatePos():
     data = request.get_json()
-    col.update_one({'id': data[id]}, 
+    col.update_one({'id': data['id']}, 
     {'$set' : 
         'x' : data['x'],
         'y' : data['y'],
@@ -34,7 +34,12 @@ def updatePos():
 
 @app.route('/test/getDronePositions', methods =  ['GET'])
 def getPositions():
-    return json.dumps(col.find())
+    ret = {}
+    cnt = 0
+    for i in col.find():
+        ret[str(cnt)] = jsonify(str(i))
+        cnt += 1
+    return ret
 
 
 if __name__ == "__main__":
