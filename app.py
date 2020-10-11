@@ -19,13 +19,13 @@ def savePositions():
         for i in range(int(data['size'])):
             col.insert_one(data['drones'][str(i)], data['drones'])
     else:
-        for i in range(int(data['size']))):
-            col.update_one(data['drones'][str(i)], {'$set' : data['drones'])
+        for i in range(int(data['size'])):
+            col.update_one(data['drones'][str(i)], {'$set' : data['drones']})
     return json.dumps({'status' : 'finished'})
 
 @app.route('/test/getDronePositions', methods =  ['GET'])
 def getPositions():
-    return(json.dumps(col.find())))
+    return json.dumps(col.find())
 
 
 if __name__ == "__main__":
