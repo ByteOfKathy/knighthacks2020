@@ -34,12 +34,13 @@ def updatePos():
 
 @app.route('/test/getDronePositions', methods =  ['GET'])
 def getPositions():
+    data = request.get_json()
     ret = {}
-    cnt = 0
-    for i in col.find():
-        for key in i:
-            ret[str(cnt)] = str(i[key])
-            cnt += 1
+    for item in col.find(data, {"_id" : 0}):
+        ret['id'] = str(item['id'])
+        ret['x'] = str(item['x'])
+        ret['y'] = str(item['y'])
+        ret['z'] = str(item['z'])
     return ret
 
 
