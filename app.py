@@ -3,6 +3,7 @@ from pymongo import MongoClient
 import json
 
 app = Flask(__name__)
+app.debug = True
 client = MongoClient()
 
 db = client['knighthacks']
